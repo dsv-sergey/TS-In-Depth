@@ -145,11 +145,18 @@ function getTitles(...args: [string | number | boolean, boolean?]): string[] {
   }
 }
 
-// function assertStringValue(val: any): asserts val as string {
-//   if (typeof val !== 'string') {
-//     throw new Error('value should have been a string');
-//   }
-// }
+function assertStringValue(value: any): asserts value is string {
+  if (typeof value !== 'string') {
+    throw new Error('value should have been a string');
+  }
+}
+
+function bookTitlesTransform(title: any): string {
+  assertStringValue(title);
+
+  return [...title].reverse().join('');
+}
+
 
 // Part 1 _____________________________________________________
 
