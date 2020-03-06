@@ -199,6 +199,48 @@ function getBookProp(book: Book, prop: BookProperties) {
   return book[prop];
 }
 
+class ReferenceItem {
+  // title: string;
+  // year: number;
+
+  // constructor(newTitle: string, newYear: number) {
+  //   this.title = newTitle;
+  //   this.year = newYear;
+  // }
+
+  private _publisher: string;
+
+  static department: string = 'Classical';
+
+  constructor(public title: string, public year: number) {
+    console.log('Creating a new ReferenseItem')
+  }
+
+  get publisher(): string {
+    return this._publisher.toUpperCase();
+  }
+
+  set publisher(newPublisher: string) {
+    this._publisher = newPublisher;
+  }
+
+  printItem(): void {
+    console.log(`${this.title} was published in ${this.year}`);
+    console.log(`Department ${ReferenceItem.department}`);
+  }
+}
+
+class Encyclopedia extends ReferenceItem {
+  constructor(title: string, year: number, public edition: number) {
+    super(title, year);
+  }
+
+  printItem(): void {
+    super.printItem();
+    console.log(`Edition ${this.edition} ${this.year}`);
+  }
+}
+
 // Part 1 _____________________________________________________
 
 // getAllBooks();
@@ -309,3 +351,22 @@ function getBookProp(book: Book, prop: BookProperties) {
 // console.log(getBookProp(getAllBooks()[0], 'id'));
 // console.log(getBookProp(getAllBooks()[0], 'markedDamged'));
 
+// Task 5
+
+const ref = new ReferenceItem('My Title', 2020);
+console.log(ref);
+ref.printItem()
+
+ref.publisher = 'My web';
+
+console.log(ref.publisher);
+
+const refEn = new Encyclopedia('My env', 2019, 10);
+
+console.log(refEn);
+
+refEn.printItem();
+
+refEn.publisher = 'My htyr';
+
+console.log(refEn.publisher);
