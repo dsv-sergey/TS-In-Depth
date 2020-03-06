@@ -8,8 +8,38 @@ function showHello(divName: string, name: string) {
 // Part 1 =================================================================================================================================
 enum Category { JavaScript, CSS, HTML, TypeScript, Angular }
 
-function getAllBooks(): Array<object> {
-const books: Array<object> = [
+interface Person {
+  name: string
+  email: string
+}
+
+interface Author extends Person {
+  numBooksPublised: number
+}
+
+interface Librarian extends Person {
+  department: string
+  assistCustomer: (custName: string) => void
+}
+
+interface DamageLogger {
+  (reason: string): void
+}
+
+interface Book {
+  id: number
+  title: string
+	author: string
+	available: boolean
+  category: Category
+  pages?: number
+  markedDamged?: DamageLogger
+}
+
+type BookProperties = keyof Book;
+
+function getAllBooks(): readonly Book[] {
+const books: readonly Book[] = <const>[
     { id: 1, title: 'Refactoring JavaScript', author: 'Evan Burchard', available: true, category: Category.JavaScript },
     { id: 2, title: 'JavaScript Testing', author: 'Liang Yuxian Eugene', available: false, category: Category.JavaScript },
     { id: 3, title: 'CSS Secrets', author: 'Lea Verou', available: true, category: Category.CSS },
@@ -60,24 +90,24 @@ function getBookAuthorByIndex(index: number): [string, string] {
   return [title, author];
 }
 
-function calcTotalPages(): bigint {
-  const data = [
-    { lib: 'libName1', books: 1_000_000_000, avgPagesPerBook: 250 },
-    { lib: 'libName2', books: 5_000_000_000, avgPagesPerBook: 300 },
-    { lib: 'libName3', books: 3_000_000_000, avgPagesPerBook: 280 }
-  ];
-  let pages = data.reduce((acc: bigint, obj) => {
-    return acc + BigInt(obj.books) * BigInt(obj.avgPagesPerBook);
-  }, 0n);
+// function calcTotalPages(): bigint {
+//   const data = [
+//     { lib: 'libName1', books: 1_000_000_000, avgPagesPerBook: 250 },
+//     { lib: 'libName2', books: 5_000_000_000, avgPagesPerBook: 300 },
+//     { lib: 'libName3', books: 3_000_000_000, avgPagesPerBook: 280 }
+//   ];
+//   let pages = data.reduce((acc: bigint, obj) => {
+//     return acc + BigInt(obj.books) * BigInt(obj.avgPagesPerBook);
+//   }, 0n);
 
-  return pages;
-}
+//   return pages;
+// }
 
 // Part 2 ======================================================================
 
-function getBookById(id: number): object | undefined {
+function getBookById(id: number): Book | undefined {
   const books = getAllBooks();
-  return books.find((book: any) => book.id === id);
+  return books.find((book: Book) => book.id === id);
 }
 
 function createCustomerId(name: string, id: number): string {
@@ -157,6 +187,17 @@ function bookTitlesTransform(title: any): string {
   return [...title].reverse().join('');
 }
 
+function printBook(book: Book): void {
+  console.log(`${book.title} by ${book.author}`);
+}
+
+function getBookProp(book: Book, prop: BookProperties) {
+  if (typeof book[prop] === 'function') {
+    return (book[prop] as Function).name;
+  }
+
+  return book[prop];
+}
 
 // Part 1 _____________________________________________________
 
@@ -210,10 +251,61 @@ function bookTitlesTransform(title: any): string {
 
 // logFirstAvailable();
 
-const myBooks = сheckoutBooks('Ann', 1, 2, 3);
+// const myBooks = сheckoutBooks('Ann', 1, 2, 3);
 
-console.log(myBooks);
+// console.log(myBooks);
 
-const checkedOutBooks = getTitles(false);
+// const checkedOutBooks = getTitles(false);
 
-console.log(checkedOutBooks);
+// console.log(checkedOutBooks);
+
+// const myBook: Book = {
+//   id: 5,
+//   title: 'Colors, Backgrounds, and Gradients',
+//   author: 'Eric A. Meyer',
+//   available: true,
+//   category: Category.CSS,
+//   // year: 2015,
+//   // copies: 3,
+//   pages: 200,
+//   markedDamged(reason: string) {
+//     console.log(`Damaged ${reason}`);
+//   }
+// }
+
+// printBook(myBook);
+// myBook.markedDamged('missing back cover');
+
+// const logDamaged: DamageLogger = (reason: string) => {
+//   console.log(`Damaged ${reason}`);
+// }
+
+// logDamaged('missing back cover');
+
+// const favoriteAuthor: Author = {
+//   name: 'Anna',
+//   email: 'anna@gmail.com',
+//   numBooksPublised: 10,
+// };
+
+// const favoriteLibrarian: Librarian = {
+//   name: 'Boris',
+//   email: 'boris@gmail.com',
+//   department: 'Classical Literature',
+//   assistCustomer: null,
+// };
+
+// const offer = {
+//   book: {
+//     title: 'Essential TypeScript',
+//   },
+// };
+
+// console.log(offer?.magazin);
+  
+// Task 4/05
+
+// console.log(getBookProp(getAllBooks()[0], 'title'));
+// console.log(getBookProp(getAllBooks()[0], 'id'));
+// console.log(getBookProp(getAllBooks()[0], 'markedDamged'));
+

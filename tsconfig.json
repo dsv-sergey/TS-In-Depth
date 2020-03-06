@@ -11,8 +11,8 @@
     "strictNullChecks": false,
     "outDir": "./dist",
     "incremental": true,
-    "tsBuildInfoFile": "./buildcache"
-
+    "tsBuildInfoFile": "./buildcache",
+    "downlevelIteration": true,
   },
   "exclude": [
     "node_modules",
