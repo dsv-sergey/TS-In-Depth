@@ -1,4 +1,4 @@
-showHello('greeting', 'TypeScript');
+// showHello('greeting', 'TypeScript');
 
 function showHello(divName: string, name: string) {
   const elt = document.getElementById(divName);
@@ -9,31 +9,31 @@ function showHello(divName: string, name: string) {
 enum Category { JavaScript, CSS, HTML, TypeScript, Angular }
 
 interface Person {
-  name: string
-  email: string
+  name: string;
+  email: string;
 }
 
 interface Author extends Person {
-  numBooksPublised: number
+  numBooksPublised: number;
 }
 
 interface Librarian extends Person {
-  department: string
-  assistCustomer: (custName: string) => void
+  department: string;
+  assistCustomer: (custName: string) => void;
 }
 
 interface DamageLogger {
-  (reason: string): void
+  (reason: string): void;
 }
 
 interface Book {
-  id: number
-  title: string
-	author: string
-	available: boolean
-  category: Category
-  pages?: number
-  markedDamged?: DamageLogger
+  id: number;
+  title: string;
+  author: string;
+  available: boolean;
+  category: Category;
+  pages?: number;
+  markedDamged?: DamageLogger;
 }
 
 type BookProperties = keyof Book;
@@ -212,8 +212,8 @@ class ReferenceItem {
 
   static department: string = 'Classical';
 
-  constructor(public title: string, public year: number) {
-    console.log('Creating a new ReferenseItem')
+  constructor(public title: string, protected year: number) {
+    console.log('Creating a new ReferenseItem');
   }
 
   get publisher(): string {
@@ -237,7 +237,7 @@ class Encyclopedia extends ReferenceItem {
 
   printItem(): void {
     super.printItem();
-    console.log(`Edition ${this.edition} ${this.year}`);
+    console.log(`Edition ${this.edition} (${this.year})`);
   }
 }
 
@@ -337,14 +337,14 @@ class Encyclopedia extends ReferenceItem {
 //   assistCustomer: null,
 // };
 
-// const offer = {
+// const offer: any = {
 //   book: {
 //     title: 'Essential TypeScript',
 //   },
 // };
 
-// console.log(offer?.magazin);
-  
+// console.log(offer?.magazin?.book);
+
 // Task 4/05
 
 // console.log(getBookProp(getAllBooks()[0], 'title'));
@@ -355,7 +355,7 @@ class Encyclopedia extends ReferenceItem {
 
 const ref = new ReferenceItem('My Title', 2020);
 console.log(ref);
-ref.printItem()
+ref.printItem();
 
 ref.publisher = 'My web';
 
@@ -366,6 +366,7 @@ const refEn = new Encyclopedia('My env', 2019, 10);
 console.log(refEn);
 
 refEn.printItem();
+
 
 refEn.publisher = 'My htyr';
 
