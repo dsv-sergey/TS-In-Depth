@@ -1,8 +1,9 @@
 import { Category } from './enums';
-import { PersonBook } from './types';
-import { Book, Author, Logger, Person, Librarian } from './intefaces';
+import { PersonBook, BookRequiredFields, UpdatedBook, СreateCustomerFunctionType } from './types';
+import { Book, Author, Logger, Person, Librarian, Magazine } from './intefaces';
 import { createCustomer, createCustomerId, getAllBooks, purge } from './functions';
-import { ReferenceItem, UniversityLibrarian, RefBook } from './classes';
+import { ReferenceItem, UniversityLibrarian, RefBook, Shelf } from './classes';
+import { sealed } from './decorators';
 
 showHello('greeting', 'TypeScript');
 
@@ -14,7 +15,7 @@ function showHello(divName: string, name: string) {
 // =================================================================================================================================
 
 let idGenerator: (name: string, id: number) => string =
-              (name: string, id: number) => `${id}-${name}`;
+  (name: string, id: number) => `${id}-${name}`;
 
 idGenerator = createCustomerId;
 
@@ -156,42 +157,103 @@ const refEn = new RefBook('My env', 2019, 10);
 // refBook.printCitation();
 // console.log(refBook);
 
-const faivoriteLibrarian: Librarian = new UniversityLibrarian();
+// const faivoriteLibrarian: Librarian = new UniversityLibrarian();
 
-console.log(faivoriteLibrarian);
-faivoriteLibrarian.name = 'Anna';
-faivoriteLibrarian.assistCustomer('Boris');
+// console.log(faivoriteLibrarian);
+// faivoriteLibrarian.name = 'Anna';
+// faivoriteLibrarian.assistCustomer('Boris');
 
-const personBook: PersonBook = {
-  name: 'Anna',
-  email: 'anna@mail.ru',
-  id: 1,
-  title: 'My title',
-  available: true,
-  category: Category.CSS,
-  author: 'Anton Pet',
-}
+// const personBook: PersonBook = {
+//   name: 'Anna',
+//   email: 'anna@mail.ru',
+//   id: 1,
+//   title: 'My title',
+//   available: true,
+//   category: Category.CSS,
+//   author: 'Anton Pet',
+// }
 
-console.log(personBook);
+// console.log(personBook);
 
-import('./classes').then(module => {
-  const reader = new module.Reader();
-  reader.name = 'Anna';
-  reader.take(getAllBooks()[0]);
-  console.log(reader);
-})
+// import('./classes').then(module => {
+//   const reader = new module.Reader();
+//   reader.name = 'Anna';
+//   reader.take(getAllBooks()[0]);
+//   console.log(reader);
+// })
+
+// Task 07.01
 
 const inventory: Book[] = [
   { id: 10, title: 'The C Programming Language', author: 'K & R', available: true, category: Category.Software },
   { id: 11, title: 'Code Complete', author: 'Steve McConnell', available: true, category: Category.Software },
   { id: 12, title: '8-Bit Graphics with Cobol', author: 'A. B.', available: true, category: Category.Software },
   { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software }
-  ];
+];
 
-let result = purge(inventory);
-  
-console.log(result);
+// let result = purge(inventory);
 
-const result2 = purge([1, 2, 3, 4]);
+// console.log(result);
 
-console.log(result2);
+// const result2 = purge([1, 2, 3, 4]);
+
+// console.log(result2);
+
+// function func<T>(message: T): T { 
+//   const regexp = /regexp/g; 
+
+//   if (typeof message !== 'string') { 
+//     return message; 
+//   } else {
+//     return message.replace(regexp, '');
+//   }  
+// }
+
+// Task 07.02
+
+const bookShelf: Shelf<Book> = new Shelf<Book>();
+
+bookShelf.add(inventory[0]);
+console.log(bookShelf.getFirst());
+
+const magazines: Magazine[] = [
+  { title: 'Programming Language Monthly', publisher: 'Code Mags' },
+  { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
+  { title: 'Five Points', publisher: 'GSU' },
+];
+
+const magazinShelf: Shelf<Magazine> = new Shelf<Magazine>();
+
+magazines.forEach(mag => magazinShelf.add(mag));
+
+console.log(magazinShelf.getFirst());
+
+magazinShelf.printTitles();
+
+// Task 07.04
+
+// const book: BookRequiredFields = {
+//   id: 1,
+//   title: 'REf;l',
+//   author: 'hy',
+//   available: false,
+//   category: Category.TypeScript,
+//   markedDamged: null,
+//   pages: 500,
+// }
+
+// const updatedBook: UpdatedBook = {
+//   id: 1,
+//   title: 'djhbvlkdf',
+// }
+
+// const params: Parameters<СreateCustomerFunctionType> = ['Anna'];
+
+// createCustomer(...params);
+
+const o = new UniversityLibrarian();
+console.log(o);
+
+o.name = 'Anna';
+(o as any).printLibrarian();
+
