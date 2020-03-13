@@ -1,9 +1,7 @@
 import { Book, Person } from './intefaces';
 
-type BookProperties = keyof Book;
+export type BookProperties = keyof Book;
 
-type PersonBook = Person & Book;
+export type PersonBook = Person & Book;
 
-type BookOrUndefined = Book | undefined;
-
-export { BookProperties, PersonBook, BookOrUndefined };
+export type BookOrUndefined = Book | undefined;

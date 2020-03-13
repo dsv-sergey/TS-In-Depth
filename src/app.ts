@@ -1,42 +1,22 @@
 import { Category } from './enums';
 import { PersonBook } from './types';
 import { Book, Author, Logger, Person, Librarian } from './intefaces';
-import { createCustomer, createCustomerId } from './functions';
+import { createCustomer, createCustomerId, getAllBooks, purge } from './functions';
 import { ReferenceItem, UniversityLibrarian, RefBook } from './classes';
 
-// showHello('greeting', 'TypeScript');
+showHello('greeting', 'TypeScript');
 
 function showHello(divName: string, name: string) {
   const elt = document.getElementById(divName);
   elt.innerText = `Hello from ${name}`;
 }
 
-// Part 1 =================================================================================================================================
-
-// Part 2 ======================================================================
-
-
-
+// =================================================================================================================================
 
 let idGenerator: (name: string, id: number) => string =
               (name: string, id: number) => `${id}-${name}`;
 
 idGenerator = createCustomerId;
-
-class Encyclopedia extends ReferenceItem {
-  constructor(title: string, year: number, public edition: number) {
-    super(title, year);
-  }
-
-  printItem(): void {
-    super.printItem();
-    console.log(`Edition ${this.edition} (${this.year})`);
-  }
-
-  printCitation(): void {
-    console.log(`${this.title} - ${this.year}`);
-  }
-}
 
 // Part 1 _____________________________________________________
 
@@ -115,9 +95,9 @@ class Encyclopedia extends ReferenceItem {
 // printBook(myBook);
 // myBook.markedDamged('missing back cover');
 
-// const logDamaged: DamageLogger = (reason: string) => {
-//   console.log(`Damaged ${reason}`);
-// }
+const logDamaged: Logger = (reason: string) => {
+  console.log(`Damaged ${reason}`);
+}
 
 // logDamaged('missing back cover');
 
@@ -158,7 +138,7 @@ class Encyclopedia extends ReferenceItem {
 
 // console.log(ref.publisher);
 
-// const refEn = new Encyclopedia('My env', 2019, 10);
+const refEn = new RefBook('My env', 2019, 10);
 
 // console.log(refEn);
 
@@ -193,3 +173,25 @@ const personBook: PersonBook = {
 }
 
 console.log(personBook);
+
+import('./classes').then(module => {
+  const reader = new module.Reader();
+  reader.name = 'Anna';
+  reader.take(getAllBooks()[0]);
+  console.log(reader);
+})
+
+const inventory: Book[] = [
+  { id: 10, title: 'The C Programming Language', author: 'K & R', available: true, category: Category.Software },
+  { id: 11, title: 'Code Complete', author: 'Steve McConnell', available: true, category: Category.Software },
+  { id: 12, title: '8-Bit Graphics with Cobol', author: 'A. B.', available: true, category: Category.Software },
+  { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software }
+  ];
+
+let result = purge(inventory);
+  
+console.log(result);
+
+const result2 = purge([1, 2, 3, 4]);
+
+console.log(result2);

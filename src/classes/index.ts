@@ -1,3 +1,4 @@
 export { default as RefBook } from './encyclopedia';
-export { UniversityLibrarian } from './university-librarian';
-export { ReferenceItem } from './reference-item';
+export * from './university-librarian';
+export * from './reference-item';
+export * from './reader';

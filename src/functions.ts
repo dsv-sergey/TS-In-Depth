@@ -141,7 +141,7 @@ export function getBookProp(book: Book, prop: BookProperties) {
     return book[prop];
 }
 
-// function calcTotalPages(): bigint {
+// export function calcTotalPages(): bigint {
 //   const data = [
 //     { lib: 'libName1', books: 1_000_000_000, avgPagesPerBook: 250 },
 //     { lib: 'libName2', books: 5_000_000_000, avgPagesPerBook: 300 },
@@ -153,3 +153,7 @@ export function getBookProp(book: Book, prop: BookProperties) {
 
 //   return pages;
 // }
+
+export function purge<T>(inventory: Array<T>): Array<T> {
+    return inventory.slice(2);
+}

@@ -1,5 +1,15 @@
 import { Category } from './enums';
 
+interface Book {
+id: number;
+title: string;
+author: string;
+available: boolean;
+category: Category;
+pages?: number;
+markedDamged?: DamageLogger;
+}
+
 interface Person {
 name: string;
 email: string;
@@ -16,16 +26,6 @@ assistCustomer: (custName: string) => void;
 
 interface DamageLogger {
 (reason: string): void;
-}
-
-interface Book {
-id: number;
-title: string;
-author: string;
-available: boolean;
-category: Category;
-pages?: number;
-markedDamged?: DamageLogger;
 }
 
 export { Book, DamageLogger as Logger, Person, Author, Librarian };
