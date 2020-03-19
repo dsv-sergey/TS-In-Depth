@@ -1,9 +1,10 @@
 import { Category } from './enums';
 import { PersonBook, BookRequiredFields, UpdatedBook, СreateCustomerFunctionType } from './types';
 import { Book, Author, Logger, Person, Librarian, Magazine } from './intefaces';
-import { createCustomer, createCustomerId, getAllBooks, purge } from './functions';
+import { createCustomer, createCustomerId, getAllBooks, purge, logCategorySearch, getBooksByCategory, getBooksByCategoryPromise, logSearchResults } from './functions';
 import { ReferenceItem, UniversityLibrarian, RefBook, Shelf } from './classes';
 import { sealed } from './decorators';
+import Encyclopedia from './classes/encyclopedia';
 
 showHello('greeting', 'TypeScript');
 
@@ -184,12 +185,12 @@ const refEn = new RefBook('My env', 2019, 10);
 
 // Task 07.01
 
-const inventory: Book[] = [
-  { id: 10, title: 'The C Programming Language', author: 'K & R', available: true, category: Category.Software },
-  { id: 11, title: 'Code Complete', author: 'Steve McConnell', available: true, category: Category.Software },
-  { id: 12, title: '8-Bit Graphics with Cobol', author: 'A. B.', available: true, category: Category.Software },
-  { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software }
-];
+// const inventory: Book[] = [
+//   { id: 10, title: 'The C Programming Language', author: 'K & R', available: true, category: Category.Software },
+//   { id: 11, title: 'Code Complete', author: 'Steve McConnell', available: true, category: Category.Software },
+//   { id: 12, title: '8-Bit Graphics with Cobol', author: 'A. B.', available: true, category: Category.Software },
+//   { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software }
+// ];
 
 // let result = purge(inventory);
 
@@ -211,24 +212,24 @@ const inventory: Book[] = [
 
 // Task 07.02
 
-const bookShelf: Shelf<Book> = new Shelf<Book>();
+// const bookShelf: Shelf<Book> = new Shelf<Book>();
 
-bookShelf.add(inventory[0]);
-console.log(bookShelf.getFirst());
+// bookShelf.add(inventory[0]);
+// console.log(bookShelf.getFirst());
 
-const magazines: Magazine[] = [
-  { title: 'Programming Language Monthly', publisher: 'Code Mags' },
-  { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
-  { title: 'Five Points', publisher: 'GSU' },
-];
+// const magazines: Magazine[] = [
+//   { title: 'Programming Language Monthly', publisher: 'Code Mags' },
+//   { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
+//   { title: 'Five Points', publisher: 'GSU' },
+// ];
 
-const magazinShelf: Shelf<Magazine> = new Shelf<Magazine>();
+// const magazinShelf: Shelf<Magazine> = new Shelf<Magazine>();
 
-magazines.forEach(mag => magazinShelf.add(mag));
+// magazines.forEach(mag => magazinShelf.add(mag));
 
-console.log(magazinShelf.getFirst());
+// console.log(magazinShelf.getFirst());
 
-magazinShelf.printTitles();
+// magazinShelf.printTitles();
 
 // Task 07.04
 
@@ -251,9 +252,42 @@ magazinShelf.printTitles();
 
 // createCustomer(...params);
 
-const o = new UniversityLibrarian();
-console.log(o);
+// const o = new UniversityLibrarian();
+// console.log(o);
 
-o.name = 'Anna';
-(o as any).printLibrarian();
+// o.name = 'Anna';
+// (o as any).printLibrarian();
 
+// o.assistCustomer = null;
+// o.assistFaculty = null;
+
+// const o = new RefBook('Title', 2020, 3);
+
+// o.printItem();
+
+// const o = new UniversityLibrarian();
+// console.log(o);
+
+// o.name = 'Anna';
+
+// o.assistCustomer('Boris');
+
+// const po = new Encyclopedia('titf', 2020, 6);
+
+// po.copies = 2;
+
+// getBooksByCategory(Category.CSS, logCategorySearch);
+
+
+// getBooksByCategoryPromise(Category.CSS)
+// .then(titles => { titles.forEach(title => console.log(title)); return titles.length })
+// .then(numberOfBooks => console.log(numberOfBooks));
+
+// getBooksByCategoryPromise(Category.Software)
+// .catch(err => console.log(err));
+
+console.log('Start');
+logSearchResults(Category.JavaScript)
+.then(console.log)
+.catch(console.log);
+console.log('Finish');
