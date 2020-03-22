@@ -20,7 +20,7 @@ let idGenerator: (name: string, id: number) => string =
 
 idGenerator = createCustomerId;
 
-// Part 1 _____________________________________________________
+// Task 2 _____________________________________________________
 
 // getAllBooks();
 
@@ -36,7 +36,7 @@ idGenerator = createCustomerId;
 
 // console.log(calcTotalPages());
 
-// Part 2 __________________________________________________
+// Task 3 __________________________________________________
 
 // const titles = getBookTitlesByCategory(Category.JavaScript);
 
@@ -80,6 +80,8 @@ idGenerator = createCustomerId;
 
 // console.log(checkedOutBooks);
 
+// Task 4 __________________________________________________
+
 // const myBook: Book = {
 //   id: 5,
 //   title: 'Colors, Backgrounds, and Gradients',
@@ -97,9 +99,9 @@ idGenerator = createCustomerId;
 // printBook(myBook);
 // myBook.markedDamged('missing back cover');
 
-const logDamaged: Logger = (reason: string) => {
-  console.log(`Damaged ${reason}`);
-}
+// const logDamaged: Logger = (reason: string) => {
+//   console.log(`Damaged ${reason}`);
+// }
 
 // logDamaged('missing back cover');
 
@@ -130,7 +132,7 @@ const logDamaged: Logger = (reason: string) => {
 // console.log(getBookProp(getAllBooks()[0], 'id'));
 // console.log(getBookProp(getAllBooks()[0], 'markedDamged'));
 
-// Task 5
+// Task 5 __________________________________________________
 
 // const ref = new ReferenceItem('My Title', 2020);
 // console.log(ref);
@@ -140,7 +142,7 @@ const logDamaged: Logger = (reason: string) => {
 
 // console.log(ref.publisher);
 
-const refEn = new RefBook('My env', 2019, 10);
+// const refEn = new RefBook('My env', 2019, 10);
 
 // console.log(refEn);
 
@@ -151,7 +153,7 @@ const refEn = new RefBook('My env', 2019, 10);
 
 // console.log(refEn.publisher);
 
-//Task 05.03
+// Task 05.03
 
 // const refBook = new Encyclopedia('Title', 2020, 10);
 
@@ -176,12 +178,16 @@ const refEn = new RefBook('My env', 2019, 10);
 
 // console.log(personBook);
 
+// Task 6 __________________________________________________
+
 // import('./classes').then(module => {
 //   const reader = new module.Reader();
 //   reader.name = 'Anna';
 //   reader.take(getAllBooks()[0]);
 //   console.log(reader);
 // })
+
+// Task 7 __________________________________________________
 
 // Task 07.01
 
@@ -200,14 +206,14 @@ const refEn = new RefBook('My env', 2019, 10);
 
 // console.log(result2);
 
-// function func<T>(message: T): T { 
-//   const regexp = /regexp/g; 
+// function func<T>(message: T): T {
+//   const regexp = /regexp/g;
 
-//   if (typeof message !== 'string') { 
-//     return message; 
+//   if (typeof message !== 'string') {
+//     return message;
 //   } else {
 //     return message.replace(regexp, '');
-//   }  
+//   }
 // }
 
 // Task 07.02
@@ -252,6 +258,8 @@ const refEn = new RefBook('My env', 2019, 10);
 
 // createCustomer(...params);
 
+// Task 8 __________________________________________________
+
 // const o = new UniversityLibrarian();
 // console.log(o);
 
@@ -275,6 +283,8 @@ const refEn = new RefBook('My env', 2019, 10);
 // const po = new Encyclopedia('titf', 2020, 6);
 
 // po.copies = 2;
+
+// Task 9 __________________________________________________
 
 // getBooksByCategory(Category.CSS, logCategorySearch);
 
